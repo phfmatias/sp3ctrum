@@ -626,7 +626,7 @@ class Application(Frame):
                                          borderwidth = 0,
                                          background = "#FFFFFF"
                                         )
-        self.hideOscValue = IntVar(0)
+        self.hideOscValue = IntVar(value=0)
 
         self.checkbuttonHideOsc = Label(
                                            self.checkbutton_hide_osc_box,
@@ -717,7 +717,7 @@ class Application(Frame):
                                          borderwidth = 0,
                                          background = "#FFFFFF"
                                         )
-        self.plottypes = IntVar(0)
+        self.plottypes = IntVar(value=0)
 
         self.checkbuttonplot_name = Label(
                                            self.checkbuttonplot_box,
@@ -753,7 +753,7 @@ class Application(Frame):
                                          borderwidth = 0,
                                          background = "#FFFFFF"
                                         )
-        self.overlayOptionsVar = IntVar(0)
+        self.overlayOptionsVar = IntVar(value=0)
 
         self.overlayButton_boxName = Label(
                                            self.overlayButton_box,
@@ -838,9 +838,9 @@ class Application(Frame):
            This method describes the values of experimental plots.
         '''
 
-        self.option_experimental = IntVar(0)
-        self.experimental_type = IntVar(0)
-        self.fwhmQuestion_asw = IntVar(0)
+        self.option_experimental = IntVar(value=0)
+        self.experimental_type = IntVar(value=0)
+        self.fwhmQuestion_asw = IntVar(value=0)
         self.experimental_points_wl = []
         self.experimental_points_abs = []
 
@@ -1385,7 +1385,7 @@ class Application(Frame):
             self.filenames = []
 
             self.filenames_m = filedialog.askopenfilenames(
-                                                           initialdir="/",
+                                                           initialdir="{}".format(os.getcwd()),
                                                            filetypes=[("Gaussian LOG files","*.log"), ("Gaussian OUTPUTS files","*.out")]
                                                           )
 
@@ -1411,7 +1411,7 @@ class Application(Frame):
             self.OffAbsOptions(False)
             self.filenames = []
             self.filenames_ = filedialog.askopenfilenames(
-                                                          initialdir="/",
+                                                          initialdir="{}".format(os.getcwd()),
                                                           filetypes=[("Gaussian LOG files","*.log"), ("Gaussian OUTPUTS files","*.out")]
                                                          )
             if len(self.filenames_) == 1:
@@ -1721,7 +1721,7 @@ class Application(Frame):
                               "The first column should be the wavelength (nm), while the second should be the Molar Absorptivity (L/mol.cm)."
                            )
         self.experimental_data_file = filedialog.askopenfilename(
-                                                                  initialdir = "/",
+                                                                  initialdir="{}".format(os.getcwd()),
                                                                   filetypes = [("File Data","*.dat")]
                                                                 )
         self.boxList_experimental_plot.insert(0, self.experimental_data_file)
