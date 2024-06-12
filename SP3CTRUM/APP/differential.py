@@ -33,7 +33,7 @@ class FiniteDifferenceDerivative(object):
     def __CP(self, yvalues, xvalues):
         criticalPoints = []
         yvalues = [round(y, 2) for y in yvalues]
-        for n in range(1, len(yvalues)-1):
+        for n in range(100, len(yvalues)-100):
             if abs(yvalues[n]) > 0.5:
                 if yvalues[n] < yvalues[n-100]:
                     if yvalues[n] < yvalues[n+100]:
@@ -45,27 +45,29 @@ class FiniteDifferenceDerivative(object):
                                             if yvalues[n] < yvalues[n+1]:
                                                 if yvalues[n] < 0:
                                                     criticalPoints.append(xvalues[n])
-        if self.__near(criticalPoints, 5) == False:
-            realCriticalPoints = criticalPoints
+        self.criticalP = criticalPoints
+
+        if self.__near(self.criticalP, 5) == False:
+            realCriticalPoints =self.criticalP
         else: 
             realCriticalPoints = []
-        while self.__near(criticalPoints, 5):
+        while self.__near(self.criticalP, 5):
             listA = []
             y = 0
-            for x in range(0, len(criticalPoints)):
-                if abs(criticalPoints[x] - criticalPoints[x-1]) < 2:
+            for x in range(0, len(self.criticalP)):
+                if abs(self.criticalP[x] - self.criticalP[x-1]) < 2:
                     if y == 0:
-                        y = criticalPoints[x]
-                        listA.append(criticalPoints[x])
-                        listA.append(criticalPoints[x-1])
-                    elif criticalPoints[x] - y < 5:
-                        listA.append(criticalPoints[x])
+                        y = self.criticalP[x]
+                        listA.append(self.criticalP[x])
+                        listA.append(self.criticalP[x-1])
+                    elif self.criticalP[x] - y < 5:
+                        listA.append(self.criticalP[x])
                     else:
                         pass
                 else:
-                    realCriticalPoints.append(criticalPoints[x])
+                    realCriticalPoints.append(self.criticalP[x])
             realCriticalPoints.append(min(listA))
             for e in listA:
-                if e in criticalPoints:
-                    criticalPoints.remove(e)
+                if e in self.criticalP:
+                    self.criticalP.remove(e)
         return realCriticalPoints
