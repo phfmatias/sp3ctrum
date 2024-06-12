@@ -225,7 +225,7 @@ class Print_Spectrum(object):
 
     def print(self, graph, name_file):
         graph.subplots_adjust(top=0.9, bottom=0.1, left=0.11, right=0.89, hspace=0.25, wspace=0.35)
-        graph.savefig(name_file, transparent=True, dpi=self.resol)
+        graph.savefig(name_file, transparent=False, dpi=self.resol)
         MetaDataPrint(name_file).reSave()
 
     def show(self, graph, name):
